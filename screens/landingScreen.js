@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   ImageBackground,
+  ScrollView,
 } from 'react-native';
 import {FONTS, color, laText} from '../constants';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -11,13 +12,13 @@ import {LAFamily, LABackground} from '../assets';
 
 export default function LandingScreen() {
   return (
-    <>
+    <ScrollView style={styles.baseContainer}>
       <View style={styles.topContainer}>
         <LABackground />
         <ImageBackground
           source={LAFamily}
           style={styles.imageBanner}
-          resizeMode="cover"
+          resizeMode="contain"
         />
       </View>
       <View style={styles.bottomContainer}>
@@ -82,15 +83,19 @@ export default function LandingScreen() {
           </View>
         </View>
       </View>
-    </>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  baseContainer: {
+    flex: 1,
+    backgroundColor: color.white,
+  },
   topContainer: {
     alignItems: 'center',
     backgroundColor: color.theme,
-    height: 400,
+    height: 280,
   },
   bottomContainer: {
     padding: 35,
@@ -142,7 +147,7 @@ const styles = StyleSheet.create({
   },
   imageBanner: {
     flex: 1,
-    width: 370,
+    width: 350,
     height: 260,
     justifyContent: 'flex-end',
     flexDirection: 'column-reverse',
