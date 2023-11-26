@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
-import {FONTS, color, laText} from '../utility';
+import {FONTS, color, laText} from '../constants';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {LAFamily, LABackground} from '../assets';
 
