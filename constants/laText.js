@@ -7,6 +7,9 @@ const laText = {
   home_point3: "That's what we say, Rest In Peace",
   signIn: 'Sign In',
   signUp: 'Sign Up',
+  loginHeader: 'Show me my portal',
+  registerHeader: 'New to Last Arzi',
+  forgotPasswordHeader: 'Forgot my credentials',
 };
 
 export default laText;

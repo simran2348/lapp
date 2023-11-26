@@ -5,6 +5,7 @@ const color = {
   white: '#ffffff',
   textBlack: '#000000',
   black: '#000000',
+  backButton: '#d9d9d9',
 };
 
 export default color;

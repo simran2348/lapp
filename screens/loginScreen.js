@@ -9,17 +9,8 @@ import {
 import {FONTS, color, laText} from '../constants';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {LAFamily, LABackground} from '../assets';
-import {ROUTES} from '../routes';
 
-export default function LandingScreen({navigation}) {
-  function toLogin() {
-    navigation.navigate(ROUTES.LOGIN);
-  }
-
-  function toRegister() {
-    navigation.navigate(ROUTES.REGISTER);
-  }
-
+export default function LoginScreen() {
   return (
     <ScrollView style={styles.baseContainer}>
       <View style={styles.topContainer}>
@@ -74,7 +65,7 @@ export default function LandingScreen({navigation}) {
         <View style={styles.buttonContainer}>
           <View>
             <TouchableOpacity
-              onPress={() => toLogin()}
+              onPress={() => {}}
               style={[styles.signInButton, styles.inputButton]}>
               <Text style={[styles.buttonText, {color: color.textWhite}]}>
                 {laText.signIn}
@@ -83,7 +74,7 @@ export default function LandingScreen({navigation}) {
           </View>
           <View>
             <TouchableOpacity
-              onPress={() => toRegister()}
+              onPress={() => {}}
               style={[styles.signUpButton, styles.inputButton]}>
               <Text style={[styles.buttonText, {color: color.theme}]}>
                 {laText.signUp}

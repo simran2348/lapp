@@ -1,4 +1,4 @@
 import MyStatusBar from './statusBar';
-import HomeHeader from './homeHeader';
+import AuthHeader from './authHeader';
 
-export {MyStatusBar, HomeHeader};
+export {MyStatusBar, AuthHeader};
