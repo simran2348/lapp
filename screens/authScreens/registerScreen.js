@@ -81,7 +81,7 @@ export default function RegisterScreen({navigation}) {
         />
         <LA_Input
           leftIcon="user-lock"
-          rightIcon={isVisible ? 'eye-slash' : 'eye'}
+          rightIcon={isConfirmVisible ? 'eye-slash' : 'eye'}
           placeholder={laText.confirmPasswordPlaceholder}
           onRightIconClick={toggleConfirmVisibility}
           value={formData.confirmPassword}

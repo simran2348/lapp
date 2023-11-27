@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: FONTS.NUNITO400,
     paddingHorizontal: 10,
+    color: color.black,
   },
   icon: {
     shadowOpacity: 0.3,
