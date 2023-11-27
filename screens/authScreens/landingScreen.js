@@ -6,10 +6,10 @@ import {
   ImageBackground,
   ScrollView,
 } from 'react-native';
-import {FONTS, color, laText} from '../constants';
+import {FONTS, color, laText} from '../../constants';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {LAFamily, LABackground} from '../assets';
-import {ToLogin, ToRegister} from '../utility';
+import {LAFamily, LABackground} from '../../assets';
+import {ToLogin, ToRegister} from '../../utility';
 
 export default function LandingScreen({navigation}) {
   const CheckIcon = () => (

@@ -7,10 +7,10 @@ import {
   ImageBackground,
   ScrollView,
 } from 'react-native';
-import {FONTS, color, laText} from '../constants';
-import {LABackground, LALogin} from '../assets';
-import {LACheckbox, LA_Input} from '../components';
-import {ToForgotPassword, ToRegister} from '../utility';
+import {FONTS, color, laText} from '../../constants';
+import {LABackground, LALogin} from '../../assets';
+import {LACheckbox, LA_Input} from '../../components';
+import {ToForgotPassword, ToRegister} from '../../utility';
 
 export default function LoginScreen({navigation}) {
   const [isVisible, setVisible] = useState(false);

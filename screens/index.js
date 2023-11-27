@@ -1,6 +1,6 @@
-import LandingScreen from './landingScreen';
-import LoginScreen from './loginScreen';
-import RegisterScreen from './registerScreen';
-import ForgotPasswordScreen from './forgotPasswordScreen';
+import LandingScreen from './authScreens/landingScreen';
+import LoginScreen from './authScreens/loginScreen';
+import RegisterScreen from './authScreens/registerScreen';
+import ForgotPasswordScreen from './authScreens/forgotPasswordScreen';
 
 export {LandingScreen, LoginScreen, RegisterScreen, ForgotPasswordScreen};

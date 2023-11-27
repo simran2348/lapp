@@ -7,10 +7,10 @@ import {
   ImageBackground,
   ScrollView,
 } from 'react-native';
-import {FONTS, color, laText} from '../constants';
-import {LABackground, LAForgotPassword, LASignup} from '../assets';
-import {LA_Input} from '../components';
-import {ToLogin} from '../utility';
+import {FONTS, color, laText} from '../../constants';
+import {LABackground, LAForgotPassword, LASignup} from '../../assets';
+import {LA_Input} from '../../components';
+import {ToLogin} from '../../utility';
 
 export default function ForgotPasswordScreen({navigation}) {
   const [isEmailValid, setEmailValid] = useState(false);

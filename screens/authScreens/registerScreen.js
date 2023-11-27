@@ -7,10 +7,10 @@ import {
   ImageBackground,
   ScrollView,
 } from 'react-native';
-import {FONTS, color, laText} from '../constants';
-import {LABackground, LASignup} from '../assets';
-import {LACheckbox, LA_Input} from '../components';
-import {ToLogin} from '../utility';
+import {FONTS, color, laText} from '../../constants';
+import {LABackground, LASignup} from '../../assets';
+import {LACheckbox, LA_Input} from '../../components';
+import {ToLogin} from '../../utility';
 
 export default function RegisterScreen({navigation}) {
   const [isVisible, setVisible] = useState(false);
