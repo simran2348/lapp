@@ -4,7 +4,6 @@ import {LALogo} from '../assets';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const AuthHeader = (props, page) => {
-  console.log(props);
   const {navigation} = props;
   switch (page) {
     case 'home':

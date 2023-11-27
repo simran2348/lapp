@@ -1,7 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import {ROUTES} from '../routes';
-import {LandingScreen, LoginScreen} from '../screens';
-import {AuthHeader, AuthHeaderBackButton} from '../resources';
+import {LandingScreen, LoginScreen, RegisterScreen} from '../screens';
+import {AuthHeader} from '../resources';
 
 const Stack = createStackNavigator();
 
@@ -23,7 +23,7 @@ export default function AuthNavigator() {
       <Stack.Screen
         options={{header: props => AuthHeader(props, 'register')}}
         name={ROUTES.REGISTER}
-        component={LoginScreen}
+        component={RegisterScreen}
       />
     </Stack.Navigator>
   );

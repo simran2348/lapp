@@ -8,16 +8,15 @@ import {
 } from 'react-native';
 import {FONTS, color, laText} from '../constants';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {LAFamily, LABackground} from '../assets';
-import {ToLogin, ToRegister} from '../utility';
+import {LABackground, LASignup} from '../assets';
 
-export default function LandingScreen(navigation) {
+export default function RegisterScreen() {
   return (
     <ScrollView style={styles.baseContainer}>
       <View style={styles.topContainer}>
         <LABackground />
         <ImageBackground
-          source={LAFamily}
+          source={LASignup}
           style={styles.imageBanner}
           resizeMode="contain"
         />
@@ -66,7 +65,7 @@ export default function LandingScreen(navigation) {
         <View style={styles.buttonContainer}>
           <View>
             <TouchableOpacity
-              onPress={() => ToLogin(navigation)}
+              onPress={() => {}}
               style={[styles.signInButton, styles.inputButton]}>
               <Text style={[styles.buttonText, {color: color.textWhite}]}>
                 {laText.signIn}
@@ -75,7 +74,7 @@ export default function LandingScreen(navigation) {
           </View>
           <View>
             <TouchableOpacity
-              onPress={() => ToRegister(navigation)}
+              onPress={() => {}}
               style={[styles.signUpButton, styles.inputButton]}>
               <Text style={[styles.buttonText, {color: color.theme}]}>
                 {laText.signUp}
@@ -149,7 +148,7 @@ const styles = StyleSheet.create({
   imageBanner: {
     flex: 1,
     width: 350,
-    height: 260,
+    height: 300,
     justifyContent: 'flex-end',
     flexDirection: 'column-reverse',
   },

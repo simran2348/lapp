@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,80 +8,76 @@ import {
   ScrollView,
 } from 'react-native';
 import {FONTS, color, laText} from '../constants';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {LAFamily, LABackground} from '../assets';
+import {LABackground, LALogin} from '../assets';
+import {LACheckbox, LA_Input} from '../components';
+import {ToForgotPassword, ToRegister} from '../utility';
 
-export default function LoginScreen() {
+export default function LoginScreen({navigation}) {
+  const [isVisible, setVisible] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isTrusted, setIsTrusted] = useState(false);
+
+  function updateEmail(text) {
+    setEmail(text);
+  }
+
+  function updatePassword(text) {
+    setPassword(text);
+  }
+
+  function updateTrust() {
+    setIsTrusted(!isTrusted);
+  }
+
   return (
     <ScrollView style={styles.baseContainer}>
       <View style={styles.topContainer}>
         <LABackground />
         <ImageBackground
-          source={LAFamily}
+          source={LALogin}
           style={styles.imageBanner}
           resizeMode="contain"
         />
       </View>
       <View style={styles.bottomContainer}>
-        <Text style={styles.quoteText}>{laText.home_quote}</Text>
-        <View style={styles.semiQuoteTextContainer}>
-          <View>
-            <FontAwesome5
-              name="check"
-              size={18}
-              color={color.textGreen}
-              style={styles.icon}
-            />
-          </View>
-          <View>
-            <Text style={styles.semiQuoteText}>{laText.home_point1}</Text>
-          </View>
-        </View>
-        <View style={styles.semiQuoteTextContainer}>
-          <View>
-            <FontAwesome5
-              name="check"
-              size={18}
-              color={color.textGreen}
-              style={styles.icon}
-            />
-          </View>
-          <View>
-            <Text style={styles.semiQuoteText}>{laText.home_point2}</Text>
-          </View>
-        </View>
-        <View style={styles.semiQuoteTextContainer}>
-          <View>
-            <FontAwesome5
-              name="check"
-              size={18}
-              color={color.textGreen}
-              style={styles.icon}
-            />
-          </View>
-          <View>
-            <Text style={styles.semiQuoteText}>{laText.home_point3}</Text>
-          </View>
+        <LA_Input
+          leftIcon="mail-bulk"
+          placeholder={laText.emailPlaceholder}
+          value={email}
+          onChange={updateEmail}
+        />
+        <LA_Input
+          leftIcon="user-lock"
+          rightIcon={isVisible ? 'eye-slash' : 'eye'}
+          placeholder={laText.passwordPlaceholder}
+          onRightIconClick={() => setVisible(!isVisible)}
+          value={password}
+          onChange={updatePassword}
+          password={!isVisible}
+        />
+        <View style={styles.forgotPasswordContainer}>
+          <Text
+            style={styles.forgotPassword}
+            onPress={() => ToForgotPassword(navigation)}>
+            {laText.forgotPassword}
+          </Text>
         </View>
         <View style={styles.buttonContainer}>
-          <View>
-            <TouchableOpacity
-              onPress={() => {}}
-              style={[styles.signInButton, styles.inputButton]}>
-              <Text style={[styles.buttonText, {color: color.textWhite}]}>
-                {laText.signIn}
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View>
-            <TouchableOpacity
-              onPress={() => {}}
-              style={[styles.signUpButton, styles.inputButton]}>
-              <Text style={[styles.buttonText, {color: color.theme}]}>
-                {laText.signUp}
-              </Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity onPress={() => {}} style={styles.signInButton}>
+            <Text style={styles.buttonText}>{laText.signIn}</Text>
+          </TouchableOpacity>
+          <LACheckbox
+            value={isTrusted}
+            onChange={updateTrust}
+            label={laText.trustDevice}
+          />
+        </View>
+        <View style={styles.notRegisteredContainer}>
+          <Text style={styles.notRegistered}>{laText.notRegistered} </Text>
+          <Text style={styles.register} onPress={() => ToRegister(navigation)}>
+            {laText.signUp}
+          </Text>
         </View>
       </View>
     </ScrollView>
@@ -101,47 +98,27 @@ const styles = StyleSheet.create({
     padding: 35,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: 30,
-  },
-  quoteText: {
-    fontSize: 20,
-    color: color.theme,
-    lineHeight: 30,
-    marginBottom: 35,
-    fontFamily: FONTS.NUNITO600,
-  },
-  semiQuoteText: {
-    fontSize: 18,
-    color: color.textGreen,
-    marginLeft: 5,
-    fontFamily: FONTS.NUNITO400,
-  },
-  semiQuoteTextContainer: {
-    marginBottom: 15,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-  },
-  icon: {
-    marginTop: 4,
-  },
-  inputButton: {
-    borderWidth: 2,
-    borderRadius: 50,
-    paddingHorizontal: 40,
-    borderColor: color.theme,
-    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginBottom: 40,
   },
   signInButton: {
     backgroundColor: color.theme,
     color: color.textWhite,
-  },
-  signUpButton: {
+    borderWidth: 2,
+    borderRadius: 50,
     borderColor: color.theme,
-    color: color.theme,
+    paddingVertical: 10,
+    marginBottom: 25,
+
+    shadowOpacity: 0.3,
+    shadowOffset: {width: 0, height: 3},
+    shadowRadius: 3,
+
+    elevation: 3,
   },
   buttonText: {
+    textAlign: 'center',
+    color: color.textWhite,
     fontFamily: FONTS.NUNITO400,
     fontSize: 20,
   },
@@ -151,5 +128,31 @@ const styles = StyleSheet.create({
     height: 260,
     justifyContent: 'flex-end',
     flexDirection: 'column-reverse',
+  },
+  forgotPasswordContainer: {
+    marginBottom: 40,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingHorizontal: 10,
+  },
+  forgotPassword: {
+    fontSize: 20,
+    fontFamily: FONTS.NUNITO400,
+    color: color.theme,
+    textAlign: 'right',
+  },
+  notRegisteredContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  notRegistered: {
+    fontFamily: FONTS.NUNITO400,
+    fontSize: 20,
+    color: color.theme,
+  },
+  register: {
+    fontFamily: FONTS.NUNITO800,
+    fontSize: 20,
+    color: color.theme,
   },
 });

@@ -10,6 +10,14 @@ const laText = {
   loginHeader: 'Show me my portal',
   registerHeader: 'New to Last Arzi',
   forgotPasswordHeader: 'Forgot my credentials',
+  emailPlaceholder: 'E-mail',
+  passwordPlaceholder: 'Password',
+  confirmPasswordPlaceholder: 'Confirm Password',
+  forgotPassword: 'Forgot Password?',
+  trustDevice: 'Trust this device',
+  notRegistered: "Haven't registered?",
+  alreadyRegistered: 'Already registered?',
+  mobilePlaceholder: 'Mobile',
 };
 
 export default laText;
