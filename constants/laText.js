@@ -20,7 +20,6 @@ const laText = {
   mobilePlaceholder: 'Mobile',
   acceptTerms: 'I accept the terms and conditions',
   validate: 'Validate',
-  mobilePlaceholder: 'Mobile',
 };
 
 export default laText;
