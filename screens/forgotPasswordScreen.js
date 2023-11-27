@@ -8,34 +8,30 @@ import {
   ScrollView,
 } from 'react-native';
 import {FONTS, color, laText} from '../constants';
-import {LABackground, LALogin} from '../assets';
-import {LACheckbox, LA_Input} from '../components';
-import {ToForgotPassword, ToRegister} from '../utility';
+import {LABackground, LAForgotPassword, LASignup} from '../assets';
+import {LA_Input} from '../components';
+import {ToLogin} from '../utility';
 
-export default function LoginScreen({navigation}) {
-  const [isVisible, setVisible] = useState(false);
+export default function ForgotPasswordScreen({navigation}) {
   const [isEmailValid, setEmailValid] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
-    isTrusted: false,
+    mobile: '',
   });
 
   const setForm = (key, value) => {
     setFormData(prevState => ({...prevState, [key]: value}));
   };
 
-  const toggleVisibility = () => setVisible(!isVisible);
-
   const isDisabled = () => {
-    return formData.email.trim() === '' || formData.password.trim() === '';
+    return formData.email.trim() === '' && formData.mobile.trim() === '';
   };
 
   const createButton = (text, onPress) => (
     <TouchableOpacity
       disabled={isDisabled()}
       onPress={onPress}
-      style={styles(isDisabled()).signInButton}>
+      style={styles(isDisabled()).validateButton}>
       <Text style={styles(isDisabled()).buttonText}>{text}</Text>
     </TouchableOpacity>
   );
@@ -49,7 +45,7 @@ export default function LoginScreen({navigation}) {
       <View style={styles().topContainer}>
         <LABackground />
         <ImageBackground
-          source={LALogin}
+          source={LAForgotPassword}
           style={styles().imageBanner}
           resizeMode="contain"
         />
@@ -63,38 +59,24 @@ export default function LoginScreen({navigation}) {
           onChange={text => setForm('email', text)}
           type="email-address"
         />
+        <Text style={styles().separator}>OR</Text>
         <LA_Input
-          leftIcon="user-lock"
-          rightIcon={isVisible ? 'eye-slash' : 'eye'}
-          placeholder={laText.passwordPlaceholder}
-          onRightIconClick={toggleVisibility}
-          value={formData.password}
-          onChange={text => setForm('password', text)}
-          password={!isVisible}
+          leftIcon="mobile-alt"
+          placeholder={laText.mobilePlaceholder}
+          value={formData.mobile}
+          onChange={text => setForm('mobile', text)}
+          type="number-pad"
+          max={10}
         />
-        <View style={styles().forgotPasswordContainer}>
-          <Text
-            style={styles().forgotPassword}
-            onPress={() => ToForgotPassword(navigation)}>
-            {laText.forgotPassword}
-          </Text>
-        </View>
         <View style={styles().buttonContainer}>
-          {createButton(laText.signIn, () => {
+          {createButton(laText.validate, () => {
             submitForm();
           })}
-          <LACheckbox
-            value={formData.isTrusted}
-            onChange={() => setForm('isTrusted', !formData.isTrusted)}
-            label={laText.trustDevice}
-          />
         </View>
-        <View style={styles().notRegisteredContainer}>
-          <Text style={styles().notRegistered}>{laText.notRegistered} </Text>
-          <Text
-            style={styles().register}
-            onPress={() => ToRegister(navigation)}>
-            {laText.signUp}
+        <View style={styles().registeredContainer}>
+          <Text style={styles().registered}>{laText.alreadyRegistered} </Text>
+          <Text style={styles().login} onPress={() => ToLogin(navigation)}>
+            {laText.signIn}
           </Text>
         </View>
       </View>
@@ -102,7 +84,7 @@ export default function LoginScreen({navigation}) {
   );
 }
 
-const styles = (isDisabled = false) =>
+const styles = (isDisabled = false, isInputDisabled = false) =>
   StyleSheet.create({
     baseContainer: {
       flex: 1,
@@ -117,16 +99,16 @@ const styles = (isDisabled = false) =>
       padding: 35,
     },
     buttonContainer: {
-      paddingHorizontal: 20,
+      paddingHorizontal: 30,
       marginBottom: 40,
     },
-    signInButton: {
+    validateButton: {
       backgroundColor: isDisabled ? color.disabled : color.theme,
       borderWidth: 2,
       borderRadius: 50,
       borderColor: isDisabled ? color.disabled : color.theme,
       paddingVertical: 10,
-      marginBottom: 25,
+      marginTop: 20,
 
       shadowOpacity: isDisabled ? 0 : 0.3,
       shadowOffset: {width: 0, height: 3},
@@ -142,35 +124,31 @@ const styles = (isDisabled = false) =>
     },
     imageBanner: {
       flex: 1,
-      width: 350,
-      height: 260,
+      width: 300,
+      height: 280,
       justifyContent: 'flex-end',
       flexDirection: 'column-reverse',
     },
-    forgotPasswordContainer: {
-      marginBottom: 40,
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
-      paddingHorizontal: 10,
-    },
-    forgotPassword: {
-      fontSize: 20,
-      fontFamily: FONTS.NUNITO400,
-      color: color.theme,
-      textAlign: 'right',
-    },
-    notRegisteredContainer: {
+    registeredContainer: {
       flexDirection: 'row',
       justifyContent: 'center',
+      marginBottom: 40,
     },
-    notRegistered: {
+    registered: {
       fontFamily: FONTS.NUNITO400,
       fontSize: 20,
       color: color.theme,
     },
-    register: {
+    login: {
       fontFamily: FONTS.NUNITO800,
       fontSize: 20,
       color: color.theme,
+    },
+    separator: {
+      fontFamily: FONTS.NUNITO500,
+      fontSize: 18,
+      textAlign: 'center',
+      marginBottom: 10,
+      color: color.black,
     },
   });

@@ -6,6 +6,8 @@ const color = {
   textBlack: '#000000',
   black: '#000000',
   backButton: '#d9d9d9',
+  disabled: '#e9e9e9',
+  disabledText: '#a1a1a1',
 };
 
 export default color;

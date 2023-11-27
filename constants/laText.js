@@ -18,6 +18,9 @@ const laText = {
   notRegistered: "Haven't registered?",
   alreadyRegistered: 'Already registered?',
   mobilePlaceholder: 'Mobile',
+  acceptTerms: 'I accept the terms and conditions',
+  validate: 'Validate',
+  mobilePlaceholder: 'Mobile',
 };
 
 export default laText;

@@ -12,6 +12,9 @@ const LA_Input = props => {
     value,
     password,
     onChange,
+    type,
+    disabled,
+    max,
   } = props;
   return (
     <>
@@ -26,6 +29,7 @@ const LA_Input = props => {
           />
         )}
         <TextInput
+          readOnly={disabled}
           style={styles.textInput}
           selectionColor={color.theme}
           placeholder={placeholder}
@@ -33,6 +37,8 @@ const LA_Input = props => {
           value={value}
           secureTextEntry={password}
           onChangeText={onChange}
+          keyboardType={type}
+          maxLength={max}
         />
         {rightIcon && (
           <FontAwesome5
