@@ -1,3 +1,8 @@
-import {ToForgotPassword, ToLogin, ToRegister} from './navigationHelper';
+import {
+  ToForgotPassword,
+  ToLogin,
+  ToRegister,
+  ToHome,
+} from './navigationHelper';
 
-export {ToForgotPassword, ToLogin, ToRegister};
+export {ToForgotPassword, ToLogin, ToRegister, ToHome};

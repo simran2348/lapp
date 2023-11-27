@@ -11,7 +11,24 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {LAFamily, LABackground} from '../assets';
 import {ToLogin, ToRegister} from '../utility';
 
-export default function LandingScreen(navigation) {
+export default function LandingScreen({navigation}) {
+  const CheckIcon = () => (
+    <FontAwesome5
+      name="check"
+      size={18}
+      color={color.textGreen}
+      style={styles.icon}
+    />
+  );
+
+  const createButton = (text, onPress, buttonStyle, textColor) => (
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.inputButton, buttonStyle]}>
+      <Text style={[styles.buttonText, {color: textColor}]}>{text}</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <ScrollView style={styles.baseContainer}>
       <View style={styles.topContainer}>
@@ -24,63 +41,30 @@ export default function LandingScreen(navigation) {
       </View>
       <View style={styles.bottomContainer}>
         <Text style={styles.quoteText}>{laText.home_quote}</Text>
-        <View style={styles.semiQuoteTextContainer}>
-          <View>
-            <FontAwesome5
-              name="check"
-              size={18}
-              color={color.textGreen}
-              style={styles.icon}
-            />
-          </View>
-          <View>
-            <Text style={styles.semiQuoteText}>{laText.home_point1}</Text>
-          </View>
-        </View>
-        <View style={styles.semiQuoteTextContainer}>
-          <View>
-            <FontAwesome5
-              name="check"
-              size={18}
-              color={color.textGreen}
-              style={styles.icon}
-            />
-          </View>
-          <View>
-            <Text style={styles.semiQuoteText}>{laText.home_point2}</Text>
-          </View>
-        </View>
-        <View style={styles.semiQuoteTextContainer}>
-          <View>
-            <FontAwesome5
-              name="check"
-              size={18}
-              color={color.textGreen}
-              style={styles.icon}
-            />
-          </View>
-          <View>
-            <Text style={styles.semiQuoteText}>{laText.home_point3}</Text>
-          </View>
-        </View>
+        {[laText.home_point1, laText.home_point2, laText.home_point3].map(
+          (point, index) => (
+            <View key={index} style={styles.semiQuoteTextContainer}>
+              <CheckIcon />
+              <Text style={styles.semiQuoteText}>{point}</Text>
+            </View>
+          ),
+        )}
         <View style={styles.buttonContainer}>
           <View>
-            <TouchableOpacity
-              onPress={() => ToLogin(navigation)}
-              style={[styles.signInButton, styles.inputButton]}>
-              <Text style={[styles.buttonText, {color: color.textWhite}]}>
-                {laText.signIn}
-              </Text>
-            </TouchableOpacity>
+            {createButton(
+              laText.signIn,
+              () => ToLogin(navigation),
+              styles.signInButton,
+              color.textWhite,
+            )}
           </View>
           <View>
-            <TouchableOpacity
-              onPress={() => ToRegister(navigation)}
-              style={[styles.signUpButton, styles.inputButton]}>
-              <Text style={[styles.buttonText, {color: color.theme}]}>
-                {laText.signUp}
-              </Text>
-            </TouchableOpacity>
+            {createButton(
+              laText.signUp,
+              () => ToRegister(navigation),
+              styles.signUpButton,
+              color.theme,
+            )}
           </View>
         </View>
       </View>

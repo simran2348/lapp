@@ -14,21 +14,27 @@ import {ToForgotPassword, ToRegister} from '../utility';
 
 export default function LoginScreen({navigation}) {
   const [isVisible, setVisible] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isTrusted, setIsTrusted] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    isTrusted: false,
+  });
 
-  function updateEmail(text) {
-    setEmail(text);
-  }
+  const setForm = (key, value) => {
+    setFormData(prevState => ({...prevState, [key]: value}));
+  };
 
-  function updatePassword(text) {
-    setPassword(text);
-  }
+  const toggleVisibility = () => setVisible(!isVisible);
 
-  function updateTrust() {
-    setIsTrusted(!isTrusted);
-  }
+  const createButton = (text, onPress, style) => (
+    <TouchableOpacity onPress={onPress} style={[styles.signInButton, style]}>
+      <Text style={styles.buttonText}>{text}</Text>
+    </TouchableOpacity>
+  );
+
+  const submitForm = () => {
+    console.log(formData);
+  };
 
   return (
     <ScrollView style={styles.baseContainer}>
@@ -44,16 +50,16 @@ export default function LoginScreen({navigation}) {
         <LA_Input
           leftIcon="mail-bulk"
           placeholder={laText.emailPlaceholder}
-          value={email}
-          onChange={updateEmail}
+          value={formData.email}
+          onChange={text => setForm('email', text)}
         />
         <LA_Input
           leftIcon="user-lock"
           rightIcon={isVisible ? 'eye-slash' : 'eye'}
           placeholder={laText.passwordPlaceholder}
-          onRightIconClick={() => setVisible(!isVisible)}
-          value={password}
-          onChange={updatePassword}
+          onRightIconClick={toggleVisibility}
+          value={formData.password}
+          onChange={text => setForm('password', text)}
           password={!isVisible}
         />
         <View style={styles.forgotPasswordContainer}>
@@ -64,12 +70,16 @@ export default function LoginScreen({navigation}) {
           </Text>
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={() => {}} style={styles.signInButton}>
-            <Text style={styles.buttonText}>{laText.signIn}</Text>
-          </TouchableOpacity>
+          {createButton(
+            laText.signIn,
+            () => {
+              submitForm();
+            },
+            styles.signInButton,
+          )}
           <LACheckbox
-            value={isTrusted}
-            onChange={updateTrust}
+            value={formData.isTrusted}
+            onChange={() => setForm('isTrusted', !formData.isTrusted)}
             label={laText.trustDevice}
           />
         </View>
