@@ -5,7 +5,7 @@ const laText = {
   home_point1: 'Last action before you bid good-bye',
   home_point2: 'Leave behind a peaceful world, free from disputes',
   home_point3: "That's what we say, Rest In Peace",
-  signIn: 'Sign Inn',
+  signIn: 'Sign In',
   signUp: 'Sign Up',
   loginHeader: 'Show me my portal',
   registerHeader: 'New to Last Arzi',
