@@ -1,4 +1,4 @@
-import LA_Input from './laInput';
-import LACheckbox from './laCheckbox';
+import App_Input from './appInput';
+import App_Checkbox from './appCheckbox';
 
-export {LA_Input, LACheckbox};
+export {App_Input, App_Checkbox};

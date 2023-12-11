@@ -6,7 +6,7 @@ import {
   ImageBackground,
   ScrollView,
 } from 'react-native';
-import {FONTS, color, laText} from '../../constants';
+import {FONTS, color, appText} from '../../constants';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {LAFamily, LABackground} from '../../assets';
 import {ToLogin, ToRegister} from '../../utility';
@@ -40,8 +40,8 @@ export default function LandingScreen({navigation}) {
         />
       </View>
       <View style={styles.bottomContainer}>
-        <Text style={styles.quoteText}>{laText.home_quote}</Text>
-        {[laText.home_point1, laText.home_point2, laText.home_point3].map(
+        <Text style={styles.quoteText}>{appText.home_quote}</Text>
+        {[appText.home_point1, appText.home_point2, appText.home_point3].map(
           (point, index) => (
             <View key={index} style={styles.semiQuoteTextContainer}>
               <CheckIcon />
@@ -52,7 +52,7 @@ export default function LandingScreen({navigation}) {
         <View style={styles.buttonContainer}>
           <View>
             {createButton(
-              laText.signIn,
+              appText.signIn,
               () => ToLogin(navigation),
               styles.signInButton,
               color.textWhite,
@@ -60,7 +60,7 @@ export default function LandingScreen({navigation}) {
           </View>
           <View>
             {createButton(
-              laText.signUp,
+              appText.signUp,
               () => ToRegister(navigation),
               styles.signUpButton,
               color.theme,

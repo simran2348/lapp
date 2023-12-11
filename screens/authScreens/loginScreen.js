@@ -7,9 +7,9 @@ import {
   ImageBackground,
   ScrollView,
 } from 'react-native';
-import {FONTS, color, laText} from '../../constants';
+import {FONTS, color, appText} from '../../constants';
 import {LABackground, LALogin} from '../../assets';
-import {LACheckbox, LA_Input} from '../../components';
+import {App_Checkbox, App_Input} from '../../components';
 import {ToForgotPassword, ToRegister} from '../../utility';
 
 export default function LoginScreen({navigation}) {
@@ -55,18 +55,18 @@ export default function LoginScreen({navigation}) {
         />
       </View>
       <View style={styles().bottomContainer}>
-        <LA_Input
+        <App_Input
           leftIcon="mail-bulk"
           rightIcon={isEmailValid && 'check'}
-          placeholder={laText.emailPlaceholder}
+          placeholder={appText.emailPlaceholder}
           value={formData.email}
           onChange={text => setForm('email', text)}
           type="email-address"
         />
-        <LA_Input
+        <App_Input
           leftIcon="user-lock"
           rightIcon={isVisible ? 'eye-slash' : 'eye'}
-          placeholder={laText.passwordPlaceholder}
+          placeholder={appText.passwordPlaceholder}
           onRightIconClick={toggleVisibility}
           value={formData.password}
           onChange={text => setForm('password', text)}
@@ -76,25 +76,25 @@ export default function LoginScreen({navigation}) {
           <Text
             style={styles().forgotPassword}
             onPress={() => ToForgotPassword(navigation)}>
-            {laText.forgotPassword}
+            {appText.forgotPassword}
           </Text>
         </View>
         <View style={styles().buttonContainer}>
-          {createButton(laText.signIn, () => {
+          {createButton(appText.signIn, () => {
             submitForm();
           })}
-          <LACheckbox
+          <App_Checkbox
             value={formData.isTrusted}
             onChange={() => setForm('isTrusted', !formData.isTrusted)}
-            label={laText.trustDevice}
+            label={appText.trustDevice}
           />
         </View>
         <View style={styles().notRegisteredContainer}>
-          <Text style={styles().notRegistered}>{laText.notRegistered} </Text>
+          <Text style={styles().notRegistered}>{appText.notRegistered} </Text>
           <Text
             style={styles().register}
             onPress={() => ToRegister(navigation)}>
-            {laText.signUp}
+            {appText.signUp}
           </Text>
         </View>
       </View>

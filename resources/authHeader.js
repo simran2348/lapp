@@ -1,6 +1,6 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {FONTS, color, laText} from '../constants';
-import {LALogo} from '../assets';
+import {FONTS, color, appText} from '../constants';
+import {AppLogo} from '../assets';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const AuthHeader = (props, page) => {
@@ -9,8 +9,8 @@ const AuthHeader = (props, page) => {
     case 'home':
       return (
         <View style={styles.headerContainer}>
-          <Image source={LALogo} />
-          <Text style={styles.headerText}>{laText.LA}</Text>
+          <Image source={AppLogo} />
+          <Text style={styles.headerText}>{appText.appName}</Text>
         </View>
       );
     case 'login':
@@ -23,7 +23,7 @@ const AuthHeader = (props, page) => {
             style={styles.backButton}
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.headerText}>{laText.loginHeader}</Text>
+          <Text style={styles.headerText}>{appText.loginHeader}</Text>
         </View>
       );
     case 'register':
@@ -36,7 +36,7 @@ const AuthHeader = (props, page) => {
             style={styles.backButton}
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.headerText}>{laText.registerHeader}</Text>
+          <Text style={styles.headerText}>{appText.registerHeader}</Text>
         </View>
       );
     case 'forgotPassword':
@@ -49,7 +49,7 @@ const AuthHeader = (props, page) => {
             style={styles.backButton}
             onPress={() => navigation.goBack()}
           />
-          <Text style={styles.headerText}>{laText.forgotPasswordHeader}</Text>
+          <Text style={styles.headerText}>{appText.forgotPasswordHeader}</Text>
         </View>
       );
   }

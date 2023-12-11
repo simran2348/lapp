@@ -1,4 +1,4 @@
-import {LA_Context} from './laContext';
-import ContextWrapper from './laContext';
+import {App_Context} from './appContext';
+import ContextWrapper from './appContext';
 
-export {LA_Context, ContextWrapper};
+export {App_Context, ContextWrapper};

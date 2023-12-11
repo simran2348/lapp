@@ -1,8 +1,8 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, TextInput, View} from 'react-native';
 import {FONTS, color} from '../constants';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-const LA_Input = props => {
+const App_Input = props => {
   const {
     leftIcon,
     rightIcon,
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LA_Input;
+export default App_Input;

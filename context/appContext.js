@@ -1,6 +1,6 @@
 import {createContext, useMemo, useState} from 'react';
 
-export const LA_Context = createContext(null);
+export const App_Context = createContext(null);
 
 export default function ContextWrapper({children}) {
   const [user, setUser] = useState({
@@ -15,6 +15,6 @@ export default function ContextWrapper({children}) {
     [user],
   );
   return (
-    <LA_Context.Provider value={preferences}>{children}</LA_Context.Provider>
+    <App_Context.Provider value={preferences}>{children}</App_Context.Provider>
   );
 }

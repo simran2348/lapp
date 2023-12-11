@@ -7,9 +7,9 @@ import {
   ImageBackground,
   ScrollView,
 } from 'react-native';
-import {FONTS, color, laText} from '../../constants';
+import {FONTS, color, appText} from '../../constants';
 import {LABackground, LAForgotPassword, LASignup} from '../../assets';
-import {LA_Input} from '../../components';
+import {App_Input} from '../../components';
 import {ToLogin} from '../../utility';
 
 export default function ForgotPasswordScreen({navigation}) {
@@ -51,32 +51,32 @@ export default function ForgotPasswordScreen({navigation}) {
         />
       </View>
       <View style={styles().bottomContainer}>
-        <LA_Input
+        <App_Input
           leftIcon="mail-bulk"
           rightIcon={isEmailValid && 'check'}
-          placeholder={laText.emailPlaceholder}
+          placeholder={appText.emailPlaceholder}
           value={formData.email}
           onChange={text => setForm('email', text)}
           type="email-address"
         />
         <Text style={styles().separator}>OR</Text>
-        <LA_Input
+        <App_Input
           leftIcon="mobile-alt"
-          placeholder={laText.mobilePlaceholder}
+          placeholder={appText.mobilePlaceholder}
           value={formData.mobile}
           onChange={text => setForm('mobile', text)}
           type="number-pad"
           max={10}
         />
         <View style={styles().buttonContainer}>
-          {createButton(laText.validate, () => {
+          {createButton(appText.validate, () => {
             submitForm();
           })}
         </View>
         <View style={styles().registeredContainer}>
-          <Text style={styles().registered}>{laText.alreadyRegistered} </Text>
+          <Text style={styles().registered}>{appText.alreadyRegistered} </Text>
           <Text style={styles().login} onPress={() => ToLogin(navigation)}>
-            {laText.signIn}
+            {appText.signIn}
           </Text>
         </View>
       </View>

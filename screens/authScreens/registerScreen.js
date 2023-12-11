@@ -7,9 +7,9 @@ import {
   ImageBackground,
   ScrollView,
 } from 'react-native';
-import {FONTS, color, laText} from '../../constants';
+import {FONTS, color, appText} from '../../constants';
 import {LABackground, LASignup} from '../../assets';
-import {LACheckbox, LA_Input} from '../../components';
+import {App_Checkbox, App_Input} from '../../components';
 import {ToLogin} from '../../utility';
 
 export default function RegisterScreen({navigation}) {
@@ -62,46 +62,46 @@ export default function RegisterScreen({navigation}) {
         />
       </View>
       <View style={styles().bottomContainer}>
-        <LA_Input
+        <App_Input
           leftIcon="mail-bulk"
           rightIcon={isEmailValid && 'check'}
-          placeholder={laText.emailPlaceholder}
+          placeholder={appText.emailPlaceholder}
           value={formData.email}
           onChange={text => setForm('email', text)}
           type="email-address"
         />
-        <LA_Input
+        <App_Input
           leftIcon="user-lock"
           rightIcon={isVisible ? 'eye-slash' : 'eye'}
-          placeholder={laText.passwordPlaceholder}
+          placeholder={appText.passwordPlaceholder}
           onRightIconClick={toggleVisibility}
           value={formData.password}
           onChange={text => setForm('password', text)}
           password={!isVisible}
         />
-        <LA_Input
+        <App_Input
           leftIcon="user-lock"
           rightIcon={isConfirmVisible ? 'eye-slash' : 'eye'}
-          placeholder={laText.confirmPasswordPlaceholder}
+          placeholder={appText.confirmPasswordPlaceholder}
           onRightIconClick={toggleConfirmVisibility}
           value={formData.confirmPassword}
           onChange={text => setForm('confirmPassword', text)}
           password={!isConfirmVisible}
         />
         <View style={styles().buttonContainer}>
-          <LACheckbox
+          <App_Checkbox
             value={formData.acceptedTerms}
             onChange={() => setForm('acceptedTerms', !formData.acceptedTerms)}
-            label={laText.acceptTerms}
+            label={appText.acceptTerms}
           />
-          {createButton(laText.signUp, () => {
+          {createButton(appText.signUp, () => {
             submitForm();
           })}
         </View>
         <View style={styles().registeredContainer}>
-          <Text style={styles().registered}>{laText.alreadyRegistered} </Text>
+          <Text style={styles().registered}>{appText.alreadyRegistered} </Text>
           <Text style={styles().login} onPress={() => ToLogin(navigation)}>
-            {laText.signIn}
+            {appText.signIn}
           </Text>
         </View>
       </View>

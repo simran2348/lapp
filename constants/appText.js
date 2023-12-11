@@ -1,5 +1,5 @@
-const laText = {
-  LA: 'Last Arzi',
+const appText = {
+  appName: 'Last Arzi',
   home_quote:
     'Everything has to come to an end, Sometime. Endings to be useful must be conclusive.',
   home_point1: 'Last action before you bid good-bye',
@@ -8,7 +8,7 @@ const laText = {
   signIn: 'Sign In',
   signUp: 'Sign Up',
   loginHeader: 'Show me my portal',
-  registerHeader: 'New to Last Arzi',
+  registerHeader: 'New to App',
   forgotPasswordHeader: 'Forgot my credentials',
   emailPlaceholder: 'E-mail',
   passwordPlaceholder: 'Password',
@@ -22,4 +22,4 @@ const laText = {
   validate: 'Validate',
 };
 
-export default laText;
+export default appText;

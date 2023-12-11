@@ -2,7 +2,7 @@ import CheckBox from '@react-native-community/checkbox';
 import {StyleSheet, Text, View} from 'react-native';
 import {FONTS, color} from '../constants';
 
-const LACheckbox = props => {
+const App_Checkbox = props => {
   const {value, onChange, label} = props;
 
   return (
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LACheckbox;
+export default App_Checkbox;

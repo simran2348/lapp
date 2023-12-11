@@ -1,5 +1,5 @@
 import FONTS from './fonts';
 import color from './colors';
-import laText from './laText';
+import appText from './appText';
 
-export {FONTS, color, laText};
+export {FONTS, color, appText};
