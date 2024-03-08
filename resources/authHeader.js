@@ -1,18 +1,10 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {FONTS, color, appText} from '../constants';
-import {AppLogo} from '../assets';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const AuthHeader = (props, page) => {
   const {navigation} = props;
   switch (page) {
-    case 'home':
-      return (
-        <View style={styles.headerContainer}>
-          <Image source={AppLogo} />
-          <Text style={styles.headerText}>{appText.appName}</Text>
-        </View>
-      );
     case 'login':
       return (
         <View style={styles.headerContainer}>

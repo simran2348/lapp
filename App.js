@@ -7,7 +7,7 @@ export default function App() {
   return (
     <ContextWrapper>
       <NavigationBase>
-        <MyStatusBar backgroundColor={color.theme} barStyle={'light-content'} />
+        <MyStatusBar />
       </NavigationBase>
     </ContextWrapper>
   );

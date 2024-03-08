@@ -14,8 +14,10 @@ export default function AuthNavigator() {
   return (
     <Stack.Navigator initialRouteName={ROUTES.HOME}>
       <Stack.Screen
-        options={{header: props => AuthHeader(props, 'home')}}
         name={ROUTES.HOME}
+        options={{
+          headerShown: false,
+        }}
         component={LandingScreen}
       />
       <Stack.Screen
