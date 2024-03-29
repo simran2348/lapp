@@ -6,7 +6,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {FONTS, color, appText} from '../../constants';
-import {ToLogin, ToRegister} from '../../utility';
+import {ToDoctorLogin, ToPatientLogin} from '../../utility';
 
 export default function LandingScreen({navigation}) {
   const createButton = (text, onPress) => (
@@ -19,10 +19,12 @@ export default function LandingScreen({navigation}) {
     <ScrollView contentContainerStyle={styles.baseContainer}>
       <View style={styles.buttonContainer}>
         <View>
-          {createButton(appText.toDoctorText, () => ToLogin(navigation))}
+          {createButton(appText.toDoctorText, () => ToDoctorLogin(navigation))}
         </View>
         <View>
-          {createButton(appText.toPatientText, () => ToRegister(navigation))}
+          {createButton(appText.toPatientText, () =>
+            ToPatientLogin(navigation),
+          )}
         </View>
       </View>
     </ScrollView>

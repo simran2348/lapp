@@ -4,11 +4,11 @@ export const ToHome = navigation => {
   navigation.navigate(ROUTES.HOME);
 };
 
-export const ToLogin = navigation => {
+export const ToDoctorLogin = navigation => {
   navigation.navigate(ROUTES.LOGIN);
 };
 
-export const ToRegister = navigation => {
+export const ToPatientLogin = navigation => {
   navigation.navigate(ROUTES.REGISTER);
 };
 
