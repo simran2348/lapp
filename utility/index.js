@@ -1,8 +1,8 @@
 import {
   ToForgotPassword,
-  ToLogin,
-  ToRegister,
+  ToDoctorLogin,
+  ToPatientLogin,
   ToHome,
 } from './navigationHelper';
 
-export {ToForgotPassword, ToLogin, ToRegister, ToHome};
+export {ToForgotPassword, ToDoctorLogin, ToPatientLogin, ToHome};
