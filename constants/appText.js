@@ -1,7 +1,7 @@
 const appText = {
   appName: 'Pathy',
-  toDoctorText: 'Doctor',
-  toPatientText: 'Patient',
+  signIn: 'Sign In',
+  signUp: 'Sign Up',
   loginHeader: 'Show me my portal',
   registerHeader: 'New to App',
   forgotPasswordHeader: 'Forgot my credentials',

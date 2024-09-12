@@ -44,7 +44,6 @@ export default function LoginScreen({navigation}) {
 
   return (
     <ScrollView style={styles().baseContainer}>
-      <View style={styles().topContainer}></View>
       <View style={styles().bottomContainer}>
         <App_Input
           leftIcon="mail-bulk"
@@ -84,7 +83,9 @@ export default function LoginScreen({navigation}) {
           <Text style={styles().notRegistered}>{appText.notRegistered} </Text>
           <Text
             style={styles().register}
-            onPress={() => ToRegister(navigation)}>
+            onPress={() => {
+              ToRegister(navigation);
+            }}>
             {appText.signUp}
           </Text>
         </View>
@@ -98,11 +99,6 @@ const styles = (isDisabled = false) =>
     baseContainer: {
       flex: 1,
       backgroundColor: color.white,
-    },
-    topContainer: {
-      alignItems: 'center',
-      backgroundColor: color.theme,
-      height: 280,
     },
     bottomContainer: {
       padding: 35,

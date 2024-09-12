@@ -10,11 +10,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.0.0",
     "@react-native-community/checkbox": "^0.5.16",
     "@react-native-community/cli": "^13.6.4",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/stack": "^6.3.20",
+    "axios": "^1.7.7",
     "react": "18.2.0",
     "react-native": "0.73.6",
     "react-native-eject": "^0.2.0",

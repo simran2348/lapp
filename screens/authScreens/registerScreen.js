@@ -1,82 +1,79 @@
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  ImageBackground,
   ScrollView,
 } from 'react-native';
 import {FONTS, color, appText} from '../../constants';
-import {LABackground, LASignup} from '../../assets';
 import {App_Checkbox, App_Input} from '../../components';
 import {ToLogin} from '../../utility';
+import {App_Context} from '../../context/appContext';
 
 export default function RegisterScreen({navigation}) {
+  const {checkEmail, isEmailValid, emailError} = useContext(App_Context);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [terms, setTerms] = useState(false);
   const [isVisible, setVisible] = useState(false);
   const [isConfirmVisible, setConfirmVisible] = useState(false);
-  const [isEmailValid, setEmailValid] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    acceptedTerms: false,
-  });
-
-  const setForm = (key, value) => {
-    setFormData(prevState => ({...prevState, [key]: value}));
-  };
 
   const toggleVisibility = () => setVisible(!isVisible);
   const toggleConfirmVisibility = () => setConfirmVisible(!isConfirmVisible);
 
-  const isDisabled = () => {
+  const isSubmitDisabled = () => {
     return (
-      formData.email.trim() === '' ||
-      formData.password.trim() === '' ||
-      formData.confirmPassword.trim() === ''
+      email.trim() === '' ||
+      password.trim() === '' ||
+      confirmPassword.trim() === '' ||
+      password !== confirmPassword
     );
   };
 
-  const createButton = (text, onPress) => (
+  const submitButton = label => (
     <TouchableOpacity
-      disabled={isDisabled()}
-      onPress={onPress}
-      style={styles(isDisabled()).signUpButton}>
-      <Text style={styles(isDisabled()).buttonText}>{text}</Text>
+      onPress={() => submitForm()}
+      style={styles(isSubmitDisabled()).signUpButton}>
+      <Text style={styles(isSubmitDisabled()).buttonText}>{label}</Text>
     </TouchableOpacity>
   );
 
+  const submitObject = () => {
+    return {
+      email,
+      password,
+    };
+  };
+
+  const emailObject = () => {
+    return email;
+  };
+
   const submitForm = () => {
-    console.log(formData);
+    console.log(submitObject());
   };
 
   return (
     <ScrollView style={styles().baseContainer}>
-      <View style={styles().topContainer}>
-        <LABackground />
-        <ImageBackground
-          source={LASignup}
-          style={styles().imageBanner}
-          resizeMode="contain"
-        />
-      </View>
       <View style={styles().bottomContainer}>
         <App_Input
           leftIcon="mail-bulk"
-          rightIcon={isEmailValid && 'check'}
+          rightIcon={emailError ? 'times' : isEmailValid ? 'check' : ''}
           placeholder={appText.emailPlaceholder}
-          value={formData.email}
-          onChange={text => setForm('email', text)}
+          value={email}
+          onChange={text => setEmail(text)}
           type="email-address"
+          onBlur={() => checkEmail(emailObject())}
         />
         <App_Input
           leftIcon="user-lock"
           rightIcon={isVisible ? 'eye-slash' : 'eye'}
           placeholder={appText.passwordPlaceholder}
           onRightIconClick={toggleVisibility}
-          value={formData.password}
-          onChange={text => setForm('password', text)}
+          value={password}
+          onChange={text => setPassword(text)}
           password={!isVisible}
         />
         <App_Input
@@ -84,19 +81,17 @@ export default function RegisterScreen({navigation}) {
           rightIcon={isConfirmVisible ? 'eye-slash' : 'eye'}
           placeholder={appText.confirmPasswordPlaceholder}
           onRightIconClick={toggleConfirmVisibility}
-          value={formData.confirmPassword}
-          onChange={text => setForm('confirmPassword', text)}
+          value={confirmPassword}
+          onChange={text => setConfirmPassword(text)}
           password={!isConfirmVisible}
         />
         <View style={styles().buttonContainer}>
           <App_Checkbox
-            value={formData.acceptedTerms}
-            onChange={() => setForm('acceptedTerms', !formData.acceptedTerms)}
+            value={terms}
+            onChange={() => setTerms(!terms)}
             label={appText.acceptTerms}
           />
-          {createButton(appText.signUp, () => {
-            submitForm();
-          })}
+          {submitButton(appText.signUp)}
         </View>
         <View style={styles().registeredContainer}>
           <Text style={styles().registered}>{appText.alreadyRegistered} </Text>
@@ -109,7 +104,7 @@ export default function RegisterScreen({navigation}) {
   );
 }
 
-const styles = (isDisabled = false) =>
+const styles = (isSubmitDisabled = false) =>
   StyleSheet.create({
     baseContainer: {
       flex: 1,
@@ -128,22 +123,22 @@ const styles = (isDisabled = false) =>
       marginBottom: 40,
     },
     signUpButton: {
-      backgroundColor: isDisabled ? color.disabled : color.theme,
+      backgroundColor: isSubmitDisabled ? color.disabled : color.theme,
       borderWidth: 2,
       borderRadius: 50,
-      borderColor: isDisabled ? color.disabled : color.theme,
+      borderColor: isSubmitDisabled ? color.disabled : color.theme,
       paddingVertical: 10,
       marginTop: 25,
 
-      shadowOpacity: isDisabled ? 0 : 0.3,
+      shadowOpacity: isSubmitDisabled ? 0 : 0.3,
       shadowOffset: {width: 0, height: 3},
       shadowRadius: 3,
 
-      elevation: isDisabled ? 0 : 3,
+      elevation: isSubmitDisabled ? 0 : 3,
     },
     buttonText: {
       textAlign: 'center',
-      color: isDisabled ? color.disabledText : color.textWhite,
+      color: isSubmitDisabled ? color.disabledText : color.textWhite,
       fontFamily: FONTS.NUNITO400,
       fontSize: 20,
     },

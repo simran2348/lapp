@@ -4,11 +4,9 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ImageBackground,
   ScrollView,
 } from 'react-native';
 import {FONTS, color, appText} from '../../constants';
-import {LABackground, LAForgotPassword, LASignup} from '../../assets';
 import {App_Input} from '../../components';
 import {ToLogin} from '../../utility';
 
@@ -42,14 +40,6 @@ export default function ForgotPasswordScreen({navigation}) {
 
   return (
     <ScrollView style={styles().baseContainer}>
-      <View style={styles().topContainer}>
-        <LABackground />
-        <ImageBackground
-          source={LAForgotPassword}
-          style={styles().imageBanner}
-          resizeMode="contain"
-        />
-      </View>
       <View style={styles().bottomContainer}>
         <App_Input
           leftIcon="mail-bulk"

@@ -15,6 +15,7 @@ const App_Input = props => {
     type,
     disabled,
     max,
+    onBlur,
   } = props;
   return (
     <>
@@ -39,6 +40,7 @@ const App_Input = props => {
           onChangeText={onChange}
           keyboardType={type}
           maxLength={max}
+          onBlur={onBlur}
         />
         {rightIcon && (
           <FontAwesome5
