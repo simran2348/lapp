@@ -1,4 +1,4 @@
-import {StyleSheet, TextInput, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {FONTS, color} from '../constants';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
@@ -16,6 +16,7 @@ const App_Input = props => {
     disabled,
     max,
     onBlur,
+    error,
   } = props;
   return (
     <>
@@ -23,8 +24,8 @@ const App_Input = props => {
         {leftIcon && (
           <FontAwesome5
             onPress={onLeftIconClick}
-            name={leftIcon}
-            color={color.theme}
+            name={leftIcon.icon}
+            color={color[leftIcon.type]}
             size={25}
             style={styles.icon}
           />
@@ -45,14 +46,15 @@ const App_Input = props => {
         {rightIcon && (
           <FontAwesome5
             onPress={onRightIconClick}
-            name={rightIcon}
-            color={color.theme}
+            name={rightIcon.icon}
+            color={color[rightIcon.type]}
             size={25}
             style={styles.icon}
           />
         )}
       </View>
       <View style={styles.textboxShadow}></View>
+      {error.isError && <Text style={styles.errorText}>{error.msg}</Text>}
     </>
   );
 };
@@ -96,6 +98,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
 
     elevation: 3,
+  },
+  errorText: {
+    color: color.error,
   },
 });
 

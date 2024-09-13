@@ -1,4 +1,4 @@
-import {createContext, useMemo, useState} from 'react';
+import {createContext, useEffect, useMemo, useState} from 'react';
 import axios from 'axios';
 import {apiUrl} from '../constants';
 
@@ -10,17 +10,16 @@ const apiRequest = axios.create({
 
 export default function ContextWrapper({children}) {
   const [isLoading, setLoading] = useState(false);
+  const [emailError, setEmailError] = useState('');
   const [isEmailValid, setEmailValid] = useState(false);
-  const [emailError, setEmailError] = useState(null);
 
   const checkEmail = email => {
     setLoading(true);
-    setEmailError(null);
     apiRequest
-      .post(apiUrl.checkEmail, {email})
+      .post(apiUrl.checkEmail, email)
       .then(response => {
-        console.log(response.status);
         response.status === 200 && setEmailValid(true);
+        setEmailError('');
       })
       .catch(error => {
         setEmailValid(false);
@@ -34,9 +33,11 @@ export default function ContextWrapper({children}) {
   const preferences = useMemo(
     () => ({
       checkEmail,
+      setEmailError,
+      setEmailValid,
+      isEmailValid,
       isLoading,
       emailError,
-      isEmailValid,
     }),
     [isLoading, emailError, isEmailValid],
   );
