@@ -10,10 +10,18 @@ import {FONTS, color, appText} from '../../constants';
 import {App_Checkbox, App_Input} from '../../components';
 import {ToLogin} from '../../utility';
 import {App_Context} from '../../context/appContext';
+import {useIsFocused} from '@react-navigation/native';
 
 export default function RegisterScreen({navigation}) {
-  const {checkEmail, emailError, setEmailError, isEmailValid, setEmailValid} =
-    useContext(App_Context);
+  const {
+    checkEmail,
+    emailError,
+    setEmailError,
+    isEmailValid,
+    setEmailValid,
+    register,
+  } = useContext(App_Context);
+  const isFocused = useIsFocused();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordValid, setPasswordValid] = useState('');
@@ -27,8 +35,12 @@ export default function RegisterScreen({navigation}) {
   const toggleConfirmVisibility = () => setConfirmVisible(!isConfirmVisible);
 
   useEffect(() => {
-    resetAll();
-  }, []);
+    if (!isFocused) {
+      resetAll();
+      setPassword('');
+      setConfirmPassword('');
+    }
+  }, [isFocused]);
 
   useEffect(() => {
     email.length === 0 && resetAll();
@@ -92,11 +104,11 @@ export default function RegisterScreen({navigation}) {
   };
 
   const emailObject = () => {
-    return {email};
+    return {email, type: 'R'};
   };
 
   const submitForm = () => {
-    console.log(submitObject());
+    register(submitObject());
   };
 
   const submitButton = label => (
@@ -125,8 +137,8 @@ export default function RegisterScreen({navigation}) {
           type="email-address"
           onBlur={() => email.length > 0 && checkEmail(emailObject())}
           error={{
-            isError: emailError !== 200 && emailError,
-            msg: emailError !== 200 && emailError,
+            isError: emailError.length > 0,
+            msg: emailError,
           }}
         />
         <App_Input

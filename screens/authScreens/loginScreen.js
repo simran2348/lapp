@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,61 +6,114 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import {useIsFocused} from '@react-navigation/native';
 import {FONTS, color, appText} from '../../constants';
 import {App_Checkbox, App_Input} from '../../components';
 import {ToForgotPassword, ToRegister} from '../../utility';
+import {App_Context} from '../../context/appContext';
 
 export default function LoginScreen({navigation}) {
+  const {
+    checkEmail,
+    emailError,
+    isEmailValid,
+    setEmailValid,
+    setEmailError,
+    passwordError,
+    setPasswordError,
+    login,
+  } = useContext(App_Context);
+  const isFocused = useIsFocused();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isVisible, setVisible] = useState(false);
-  const [isEmailValid, setEmailValid] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    isTrusted: false,
-  });
 
-  const setForm = (key, value) => {
-    setFormData(prevState => ({...prevState, [key]: value}));
+  useEffect(() => {
+    if (!isFocused) {
+      resetAll();
+      setPassword('');
+    }
+  }, [isFocused]);
+
+  useEffect(() => {
+    email.length === 0 && resetAll();
+  }, [email]);
+
+  useEffect(() => {
+    password.length === 0 && setPasswordError('');
+  }, [password]);
+
+  const resetAll = () => {
+    setEmailError('');
+    setEmail('');
+    setEmailValid(false);
   };
 
   const toggleVisibility = () => setVisible(!isVisible);
 
-  const isDisabled = () => {
-    return formData.email.trim() === '' || formData.password.trim() === '';
+  const isSubmitDisabled = () => {
+    return password.trim() === '' || email.trim() === '' || !isEmailValid;
+  };
+
+  const submitObject = () => {
+    return {
+      email,
+      password,
+    };
+  };
+
+  const emailObject = () => {
+    return {email, type: 'L'};
+  };
+
+  const submitForm = () => {
+    login(submitObject());
   };
 
   const createButton = (text, onPress) => (
     <TouchableOpacity
-      disabled={isDisabled()}
+      disabled={isSubmitDisabled()}
       onPress={onPress}
-      style={styles(isDisabled()).signInButton}>
-      <Text style={styles(isDisabled()).buttonText}>{text}</Text>
+      style={styles(isSubmitDisabled()).signInButton}>
+      <Text style={styles(isSubmitDisabled()).buttonText}>{text}</Text>
     </TouchableOpacity>
   );
-
-  const submitForm = () => {
-    console.log(formData);
-  };
 
   return (
     <ScrollView style={styles().baseContainer}>
       <View style={styles().bottomContainer}>
         <App_Input
-          leftIcon="mail-bulk"
-          rightIcon={isEmailValid && 'check'}
+          leftIcon={{icon: 'mail-bulk', type: 'theme'}}
+          rightIcon={
+            isEmailValid
+              ? {icon: 'check', type: 'success'}
+              : emailError
+              ? {icon: 'times', type: 'error'}
+              : ''
+          }
           placeholder={appText.emailPlaceholder}
-          value={formData.email}
-          onChange={text => setForm('email', text)}
+          value={email}
+          onChange={text => setEmail(text.trim())}
           type="email-address"
+          onBlur={() => email.length > 0 && checkEmail(emailObject())}
+          error={{
+            isError: emailError.length > 0,
+            msg: emailError,
+          }}
         />
         <App_Input
-          leftIcon="user-lock"
-          rightIcon={isVisible ? 'eye-slash' : 'eye'}
+          leftIcon={{icon: 'user-lock', type: 'theme'}}
+          rightIcon={
+            isVisible
+              ? {icon: 'eye-slash', type: 'theme'}
+              : {icon: 'eye', type: 'theme'}
+          }
           placeholder={appText.passwordPlaceholder}
           onRightIconClick={toggleVisibility}
-          value={formData.password}
-          onChange={text => setForm('password', text)}
+          value={password}
+          onChange={text => setPassword(text.trim())}
           password={!isVisible}
+          error={{isError: passwordError.length > 0, msg: passwordError}}
         />
         <View style={styles().forgotPasswordContainer}>
           <Text
@@ -73,11 +126,11 @@ export default function LoginScreen({navigation}) {
           {createButton(appText.signIn, () => {
             submitForm();
           })}
-          <App_Checkbox
+          {/* <App_Checkbox
             value={formData.isTrusted}
             onChange={() => setForm('isTrusted', !formData.isTrusted)}
             label={appText.trustDevice}
-          />
+          /> */}
         </View>
         <View style={styles().notRegisteredContainer}>
           <Text style={styles().notRegistered}>{appText.notRegistered} </Text>

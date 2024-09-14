@@ -7,7 +7,7 @@ const Stack = createStackNavigator();
 
 export default function AuthNavigator() {
   return (
-    <Stack.Navigator initialRouteName={ROUTES.REGISTER}>
+    <Stack.Navigator initialRouteName={ROUTES.LOGIN}>
       <Stack.Screen
         options={{
           header: props => AuthHeader(props, 'login'),

@@ -54,7 +54,7 @@ const App_Input = props => {
         )}
       </View>
       <View style={styles.textboxShadow}></View>
-      {error.isError && <Text style={styles.errorText}>{error.msg}</Text>}
+      {error?.isError && <Text style={styles.errorText}>{error.msg}</Text>}
     </>
   );
 };
